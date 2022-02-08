@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+
+<body>
+  <!--
+Обязательное задание.
+
+Необходимо скопировать и вставить в данный скрипт все функции из 4 задания.
+Необходимо реализовать функцию:
+mathOperation(arg1, arg2, operation);
+Параметры:
+arg1 - первое число.
+arg2 - второе число.
+operation - строка, которая содержит один символ из: "+", "-", "*", "/".
+Функция mathOperation должна вернуть результат операции, который был передан в
+параметр operation для двух первых аргументов (arg1 и arg2).
+Функция mathOperation должна использовать для вычисления функции из 4 задания.
+
+Примеры вызова функции:
+console.log(mathOperation(5, 3, "+")); // 8
+console.log(mathOperation(5, 3, ":)")); // NaN
+
+Функции mathOperation всегда передаются корректные числа, проверки на NaN,
+Infinity делать не нужно, однако, в случае если был передан некорректный
+аргумент в параметр operation, необходимо вернуть NaN.
+
+Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
+-->
+  <script>
+    "use strict";
+
+    /**
+   * функция складывает значения поступивших в неё 2-х переменных
+   * @param {Number} a первое слагаемое 
+   * @param {Number} b второе слагаемое 
+   * @returns {Number} вернёт результат сложения a и b
+   */
+    function adder(a, b) {
+      return a + b;
+    }
+
+    /**
+     * функция вычитает из большего из поступивших в неё чисел меньшее поступившее в неё число
+     * @param {Number} a  первое число
+     * @param {Number} b  второе число
+     * @returns {Number} разность между большим и меньшим числами, если числа равны - 0
+     */
+    function substracter(a, b) {
+      if (a >= b) {
+        return a - b;
+      }
+      return b - a;
+    }
+
+    /**
+     * функция перемножает значения 2х переменных, поступивших в неё
+     * @param {Number} a 1е число 
+     * @param {Number} b 2е число
+     * @returns {Number} произведение 2х чисел
+     */
+    function multiplier(a, b) {
+      return a * b;
+    }
+
+    /**
+     * функция делит 1й поступивший в неё параметр на 2й поступивший параметр
+     * @param {Number} a 1й параметр 
+     * @param {Number} b 2й параметр
+     * @returns {Number} частное от деления 1го на 2й параметр
+     */
+    function divider(a, b) {
+      return a / b;
+    }
+
+    /**
+   * функция производит простые (+-/*) арифметические операции между 1-м и 2-м параметром
+   * в соответствии с 3 параметром. 
+   * Для каждой арифм. операции используется отдельная внешняя функция
+   * @param {Number} arg1 1е число 
+   * @param {Number} arg2 2е число
+   * @param {string} строка со знаком математического оператора (работает только с '+', '-', '*' и '/')
+   * @returns {Number, NaN} возвращает результат математической операции, a если оператор не корректен  - NaN 
+   */
+    function mathOperation(arg1, arg2, operation) {
+      switch (operation) {
+        case '+':
+          return adder(arg1, arg2);
+        case '-':
+          return substracter(arg1, arg2);
+        case '*':
+          return multiplier(arg1, arg2);
+        case '/':
+          return divider(arg1, arg2);
+        default:
+          return NaN
+      }
+    }
+
+    console.log(mathOperation(5, 3, "+"));
+    console.log(mathOperation(7, 11, "+"));
+    console.log(mathOperation(10, -2, "*"));
+    console.log(mathOperation(5, 3, "/"));
+    console.log(mathOperation(22, 55, "-"));
+    console.log(mathOperation(5, 3, ":"));
+    console.log(mathOperation(5, 3, "x"));
+
+  </script>
+</body>
+
+</html>
