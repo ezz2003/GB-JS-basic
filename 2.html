@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Homework</title>
+  </head>
+
+  <body>
+    <!--
+Обязательное задание.
+
+Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
+Необходимо создать функцию-конструктор/класс для поста в социальной сети.
+Названия: `PostES5` для es5 стиля и `PostES6` для es6 стиля.
+Пост должен хранить:
+1. Автора поста (имени достаточно).
+2. Текст поста.
+3. Дату и время последнего изменения поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Каждому экземпляру объекта должен быть доступен метод `edit`, который будет
+менять текст поста.
+
+---
+
+Необходимо создать функцию-конструктор/класс для закрепленного поста в
+социальной сети.
+Названия: `AttachedPostES5` для es5 стиля и `AttachedPostES6` для es6 стиля.
+Закрепленный пост должен наследоваться от обычного поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Закрепленный пост должен иметь свойство `highlighted`, в котором по умолчанию
+будет лежать значение false (это свойство будет обозначать, будет ли наш
+закрепленный пост подсвечен).
+У экземпляров объекта закрепленного поста должен быть метод с названием
+`makeTextHighlighted`, который сделает так, чтобы наш пост стал подсвеченным
+(будет менять свойство `highlighted`).
+
+---
+
+Подсказки:
+1. Задание сложное, советую делать по аналогии с примером на онлайн-занятии.
+2. Обратите внимание что пост хранит "дату и время последнего изменения
+поста", это значит что если пост кто-то изменит (например вызовет какой-то
+метод, который изменит что-то в посте), дата и время последнего изменения
+поста также должна измениться.
+3. Выполняйте все по порядку, не стоит пытаться сделать все сразу, иначе можно
+что-нибудь пропустить.
+4. Если непонятно условие - задайте вопрос.
+-->
+    <script>
+      "use strict";
+
+      function PostES5(author, text) {
+        this.author = author;
+        this.text = text;
+        this.dateChange = new Date();
+      }
+
+      PostES5.prototype.edit = function () {
+        this.text = this.text.replaceAll("o", "O");
+        this.text = this.text.replaceAll("e", "E");
+        this.dateChange = new Date();
+      };
+
+      const post15 = new PostES5(
+        "John",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      );
+      const post25 = new PostES5(
+        "Sarah",
+        "Etiam pellentesque lectus massa, quis vehicula libero vulputate vitae."
+      );
+
+      function AttachedPostES5(author, text) {
+        PostES5.call(this, author, text);
+        this.highlighted5 = false;
+      }
+
+      AttachedPostES5.prototype = Object.create(PostES5.prototype);
+      AttachedPostES5.prototype.constructor = AttachedPostES5;
+
+      AttachedPostES5.prototype.makeTextHighlighted = function () {
+        this.highlighted5 = !this.highlighted5;
+      };
+
+      const post15A = new AttachedPostES5(
+        "Ivan",
+        "Nunc in feugiat metus, ut aliquet dui. Nunc eget felis non odio\
+         rhoncus faucibus eget id nulla."
+      );
+
+      console.log(post15);
+      post15.edit();
+      console.log(post15);
+      console.log(post15A);
+      post15A.edit();
+      post15A.makeTextHighlighted();
+      console.log(post15A);
+
+      class PostES6 {
+        constructor(author, text) {
+          this.author = author;
+          this.text = text;
+          this.dateChange = new Date();
+        }
+
+        edit() {
+          this.text = this.text.replaceAll("o", "O");
+          this.text = this.text.replaceAll("e", "E");
+          this.dateChange = new Date();
+        }
+      }
+
+      const post16 = new PostES5(
+        "Michael",
+        "At vero eos et accusam et justo duo dolores et ea rebum. "
+      );
+      const post26 = new PostES5(
+        "Sarah",
+        "Etiam pellentesque lectus massa, quis vehicula libero vulputate vitae."
+      );
+
+      class AttachedPostES6 extends PostES6 {
+        constructor(author, text) {
+          super(author, text);
+          this.highlighted6 = false;
+        }
+
+        makeTextHighlighted() {
+          this.highlighted6 = true;
+        }
+      }
+
+      const post16A = new AttachedPostES6(
+        "Lane",
+        "Nunc non felis sed lorem ultrices consectetur sed vitae turpis."
+      );
+
+      console.log(post16);
+      post16.edit();
+      console.log(post16);
+      console.log(post16A);
+      post16A.edit();
+      post16A.makeTextHighlighted();
+      console.log(post16A);
+    </script>
+  </body>
+</html>
