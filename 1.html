@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Homework</title>
+  </head>
+  <body>
+    <!--
+Обязательное задание.
+
+Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
+Необходимо создать функцию-конструктор/класс для продукта.
+Названия: `ProductES5` для es5 стиля, `ProductES6` для es6 стиля.
+При создании объекта от функции-конструктора/класса необходимо передавать имя
+и цену товара, эта информация должна быть сохранена в объекте.
+Также у объекта должна быть возможность выполнить метод `make25Discount`, данный
+метод должен уменьшать стоимость продукта на 25%.
+Необходимо продемонстрировать работу с объектом (в свободной форме).
+-->
+    <script>
+      "use strict";
+
+      function ProductES5(productName, price) {
+        this.productName = productName;
+        this.price = price;
+      }
+
+      ProductES5.prototype.make25Discount = function (discount) {
+        this.price = (this.price / 100) * (100 - discount);
+      };
+
+      const product15 = new ProductES5("boots", 1000);
+      const product25 = new ProductES5("coat", 2000);
+
+      console.log(
+        `ES5 ${product15.productName}, ${product15.price} - before discount`
+      );
+
+      product15.make25Discount(25);
+
+      console.log(
+        `ES5 ${product15.productName}, ${product15.price} - after discount`
+      );
+
+      class ProductES6 {
+        constructor(productName, price) {
+          this.productName = productName;
+          this.price = price;
+        }
+
+        make25Discount(discount) {
+          this.price = (this.price / 100) * (100 - discount);
+        }
+
+        get product() {
+          return this.productName + ", " + this.price;
+        }
+      }
+
+      const product16 = new ProductES6("hat", 500);
+      const product26 = new ProductES6("shirt", 700);
+
+      console.log(`ES6 ${product16.product} - before discount`);
+
+      product16.make25Discount(25);
+
+      console.log(`ES6 ${product16.product} - after discount`);
+    </script>
+  </body>
+</html>
